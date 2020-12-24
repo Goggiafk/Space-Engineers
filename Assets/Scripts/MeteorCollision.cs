@@ -4,14 +4,22 @@ using UnityEngine;
 
 public class MeteorCollision : MonoBehaviour
 {
+    private Vector2 screenBounds;
+    private Rigidbody rb;
+    public float speedOfMeteors;
     void Start()
     {
-        InvokeRepeating("destroy", 3f, 1f);
+        rb = this.GetComponent<Rigidbody>();
+        rb.velocity = new Vector3(speedOfMeteors, speedOfMeteors, speedOfMeteors);
+        screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
     }
 
-    public void destroy()
+    void Update()
     {
-        Destroy(this.gameObject);
+        if (this.gameObject.transform.position.y < -5f)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
 }

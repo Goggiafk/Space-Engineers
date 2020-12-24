@@ -1,0 +1,8 @@
+RemoveAds=Supprimer Les Publicités
+StartButton=COMMENCER
+BackButton=revenir en arrière
+SOUND=Audio
+HighestScore=Meilleur Score:
+ScoreText=Scores:
+MoneyText=Argent:
+RestoreLife=Restaurer La Vie

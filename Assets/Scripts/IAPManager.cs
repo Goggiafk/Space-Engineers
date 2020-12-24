@@ -10,6 +10,7 @@ public class IAPManager : MonoBehaviour, IStoreListener
     public GameObject purchaceMenu;
     public Button removeAdsButton1;
     public Button removeAdsButton2;
+    public Text moneyText;
 
     public static IAPManager instance;
 
@@ -18,6 +19,9 @@ public class IAPManager : MonoBehaviour, IStoreListener
 
     //Step 1 create your products
     private string removeAds = "remove_ads";
+    private string coins15000 = "coins10000";
+    private string coins60000 = "coins50000";
+    private string coins120000 = "coins100000";
 
 
     //************************** Adjust these methods **************************************
@@ -28,6 +32,9 @@ public class IAPManager : MonoBehaviour, IStoreListener
 
         //Step 2 choose if your product is a consumable or non consumable
         builder.AddProduct(removeAds, ProductType.NonConsumable);
+        builder.AddProduct(coins15000, ProductType.Consumable);
+        builder.AddProduct(coins60000, ProductType.NonConsumable);
+        builder.AddProduct(coins120000, ProductType.NonConsumable);
 
         UnityPurchasing.Initialize(this, builder);
     }
@@ -36,6 +43,19 @@ public class IAPManager : MonoBehaviour, IStoreListener
     {
         BuyProductID(removeAds);
     }
+    public void Buy15000coins()
+    {
+        BuyProductID(coins15000);
+    }
+    public void Buy60000coins()
+    {
+        BuyProductID(coins60000);
+    }
+    public void Buy120000coins()
+    {
+        BuyProductID(coins120000);
+    }
+
     private bool IsInitialized()
     {
         return m_StoreController != null && m_StoreExtensionProvider != null;
@@ -53,7 +73,27 @@ public class IAPManager : MonoBehaviour, IStoreListener
         if (String.Equals(args.purchasedProduct.definition.id, removeAds, StringComparison.Ordinal))
         {
             Debug.Log(string.Format("ProcessPurchace: PASS product: '{0}'", args.purchasedProduct.definition.id));
+            PlayerPrefs.SetInt("removeAds", 1);
+            removeAdsButton1.interactable = false;
+            removeAdsButton2.interactable = false;
+        } else if (String.Equals(args.purchasedProduct.definition.id, coins15000, StringComparison.Ordinal))
+        {
+            Debug.Log(string.Format("ProcessPurchace: PASS product: '{0}'", args.purchasedProduct.definition.id));
+            PlayerPrefs.SetInt("money", PlayerPrefs.GetInt("money") + 15000);
+            moneyText.text = PlayerPrefs.GetInt("money").ToString();
         }
+        else if (String.Equals(args.purchasedProduct.definition.id, coins60000, StringComparison.Ordinal))
+        {
+            Debug.Log(string.Format("ProcessPurchace: PASS product: '{0}'", args.purchasedProduct.definition.id));
+            PlayerPrefs.SetInt("money", PlayerPrefs.GetInt("money") + 60000);
+            moneyText.text = PlayerPrefs.GetInt("money").ToString();
+        }
+        else if (String.Equals(args.purchasedProduct.definition.id, coins120000, StringComparison.Ordinal))
+        {
+            Debug.Log(string.Format("ProcessPurchace: PASS product: '{0}'", args.purchasedProduct.definition.id));
+            PlayerPrefs.SetInt("money", PlayerPrefs.GetInt("money") + 120000);
+            moneyText.text = PlayerPrefs.GetInt("money").ToString();
+        } 
         else
         {
             Debug.Log("Purchase Failed");
@@ -75,7 +115,6 @@ public class IAPManager : MonoBehaviour, IStoreListener
     {
         if (instance != null) { Destroy(gameObject); return; }
         instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     void BuyProductID(string productId)
@@ -85,12 +124,10 @@ public class IAPManager : MonoBehaviour, IStoreListener
             Product product = m_StoreController.products.WithID(productId);
             if (product != null && product.availableToPurchase)
             {
-                changeScreenToPurchace();
                 Debug.Log(string.Format("Purchacing product asychronously: '{0}'", product.definition.id));
-                PlayerPrefs.SetInt("removeAds", 1);
-                removeAdsButton1.interactable = false;
-                removeAdsButton2.interactable = false;
+                changeScreenToPurchace();
                 purchacesText.text = "Thanks for your purchace!";
+                m_StoreController.InitiatePurchase(product);
             }
             else
             {

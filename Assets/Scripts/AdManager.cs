@@ -102,7 +102,6 @@ public class AdManager : MonoBehaviour, IUnityAdsListener
 
     void rewardPlayer()
     {
-        Player.healthOfRocket++;
         checkWatched = true;
         heart1.SetActive(true);
         menuOfDeath.SetActive(false);

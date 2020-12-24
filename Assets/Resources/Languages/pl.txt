@@ -1,0 +1,8 @@
+RemoveAds=Pozbyć się reklamy
+StartButton=START
+BackButton=Wróć
+SOUND=Dzwięk
+HighestScore=Najwyższy Wynik:
+ScoreText=Punkty:
+MoneyText=Pieniądze:
+RestoreLife=Przywróć życie

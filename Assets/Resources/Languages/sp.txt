@@ -1,0 +1,8 @@
+RemoveAds=Eliminar anuncios
+StartButton=EMPEZAR
+BackButton=Volver
+SOUND=Sondio
+HighestScore=Puntuación más alta:
+ScoreText=Puntuaciones:
+MoneyText=Dinero:
+RestoreLife=Restaurar vida

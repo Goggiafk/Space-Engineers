@@ -1,0 +1,8 @@
+RemoveAds=Убрать Рекламу
+StartButton=ЗАПУСК
+BackButton=Назад
+SOUND=Звук
+HighestScore=Лучший результат:
+ScoreText=Очки:
+MoneyText=Деньги:
+RestoreLife=Восстановить жизнь
