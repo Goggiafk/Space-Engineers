@@ -42,6 +42,13 @@ public class AdManager : MonoBehaviour, IUnityAdsListener
         // Initialize the Ads listener and service:
         Advertisement.AddListener(this);
         Advertisement.Initialize(gameId, true);
+
+
+        ///////////////////////////////////////
+        //PlayerPrefs.SetInt("removeAds", 1);//
+        ///////////////////////////////////////
+
+
     }
 
     // Implement a function for showing a rewarded video ad:

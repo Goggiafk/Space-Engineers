@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class MeteorSpawning : MonoBehaviour
 {
-    public GameObject meteor;
+    public GameObject[] meteors;
     public GameObject player;
     Vector3 spawnPosition;
     public float timeOnTask;
@@ -14,7 +14,7 @@ public class MeteorSpawning : MonoBehaviour
     public bool spawningOfMeteors;
     public GameObject startButton;
     public GameObject healthBar;
-    
+
     public Text scores;
     public GameObject highestScore;
     public GameObject collectableScores;
@@ -40,6 +40,7 @@ public class MeteorSpawning : MonoBehaviour
     }
     public void invokeSpawning()
     {
+        Player.healthOfRocket = PlayerPrefs.GetInt("maxHearts");
         moneyItself.SetActive(false);
         collectableScores.SetActive(true);
         highestScore.SetActive(false);
@@ -55,7 +56,7 @@ public class MeteorSpawning : MonoBehaviour
     public void cancelSpawning()
     {
         moneyItself.SetActive(true);
-        PlayerPrefs.SetInt("money", PlayerPrefs.GetInt("money") + (scoreCount/10));
+        PlayerPrefs.SetInt("money", PlayerPrefs.GetInt("money") + (scoreCount / 5));
         moneyText.text = PlayerPrefs.GetInt("money").ToString();
         collectableScores.SetActive(false);
         highestScore.SetActive(true);
@@ -68,12 +69,21 @@ public class MeteorSpawning : MonoBehaviour
         startButton.SetActive(true);
         effectsOfSpace.SetActive(false);
     }
-   void spawnGameObject()
+    void spawnGameObject()
     {
         spawnPosition = new Vector3(Random.Range(-2.5f, 2.5f), player.transform.position.y + 10f, 0f);
-        Instantiate(meteor, spawnPosition, Quaternion.Euler(Random.Range(1, 90), Random.Range(1, 90), Random.Range(1, 90)));
+        int randomMeteor = Random.Range(0, meteors.Length);
+        if (!(randomMeteor == 10))
+        {
+            Instantiate(meteors[randomMeteor], spawnPosition, Quaternion.Euler(Random.Range(1, 90), Random.Range(1, 90), Random.Range(1, 90)));
+            Vector3 customScale = new Vector3(Random.Range(1, 3), Random.Range(1, 3), Random.Range(1, 3));
+            meteors[randomMeteor].transform.localScale = customScale;
+        }
+        else
+        {
+            Instantiate(meteors[randomMeteor], spawnPosition, Quaternion.identity);
+            meteors[10].transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
         scoreCount += 10;
-        Vector3 customScale = new Vector3 (Random.Range(1, 3), Random.Range(1, 3), Random.Range(1, 3));
-        meteor.transform.localScale = customScale;
     }
 }

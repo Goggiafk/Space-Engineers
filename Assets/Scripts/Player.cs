@@ -2,12 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.UI;
+using Unity.Mathematics;
+using UnityEngine.SocialPlatforms;
+
 public class Player : MonoBehaviour
 {
     public GameObject menuOfDeath;
-    public int healthOfRocket;
-    public int maxNumberOfHealth;
+    public static int healthOfRocket;
+    public static int maxNumberOfHealth;
 
     public Image[] hearts;
     public Sprite heartSprite;
@@ -22,10 +26,25 @@ public class Player : MonoBehaviour
     public Button restoreButton;
     public Text moneyText;
 
+    public Button removeAdsButton1;
+    public Button removeAdsButton2;
+
+    public GameObject firstScreen;
+
     void Start()
     {
+        if (!PlayerPrefs.HasKey("firstTime"))
+        {
+            firstScreen.SetActive(true);
+            PlayerPrefs.SetInt("firstTime", 1);
+        }
         scoreText.text = PlayerPrefs.GetInt("highestScore").ToString();
         moneyText.text = PlayerPrefs.GetInt("money").ToString();
+        if (!PlayerPrefs.HasKey("maxHearts"))
+        {
+            PlayerPrefs.SetInt("maxHearts", 3);
+        }
+        maxNumberOfHealth = PlayerPrefs.GetInt("maxHearts");
     }
     void OnCollisionEnter(Collision collision)
     {
@@ -35,11 +54,11 @@ public class Player : MonoBehaviour
             Destroy(collision.gameObject);
             MeshRenderer rocketRendered = GetComponent<MeshRenderer>();
             Collider rockCollider = GetComponent<Collider>();
-            StartCoroutine(Timer(0f, () => {rockCollider.enabled = false; }));
-            StartCoroutine(Timer(0f, () => { rocketRendered.enabled = false; }));
+            StartCoroutine(Timer(0f, () => { rockCollider.enabled = false; }));
+            /*StartCoroutine(Timer(0f, () => { rocketRendered.enabled = false; }));
             StartCoroutine(Timer(0.5f, () => { rocketRendered.enabled = true; }));
             StartCoroutine(Timer(1f, () => { rocketRendered.enabled = false; }));
-            StartCoroutine(Timer(1.5f, () => { rocketRendered.enabled = true; }));
+            StartCoroutine(Timer(1.5f, () => { rocketRendered.enabled = true; }));*/
             StartCoroutine(Timer(1.5f, () => { rockCollider.enabled = true; }));
             StartCoroutine(Timer(0f, () => { text.text = "Ouch!"; }));
             StartCoroutine(Timer(0.8f, () => { text.text = ""; }));
@@ -48,7 +67,7 @@ public class Player : MonoBehaviour
             {
                 healthOfRocket--;
             }
-            if(healthOfRocket <= 0)
+            if (healthOfRocket <= 0)
             {
                 menuOfDeath.SetActive(true);
                 if (MeteorSpawning.scoreCount > PlayerPrefs.GetInt("highestScore"))
@@ -60,10 +79,27 @@ public class Player : MonoBehaviour
                 Time.timeScale = 0.05f;
             }
         }
+        else if (collision.gameObject.tag == "Money")
+        {
+            PlayerPrefs.SetInt("money", PlayerPrefs.GetInt("money") + 20);
+            StartCoroutine(Timer(0f, () => { text.text = "+20"; }));
+            StartCoroutine(Timer(0.8f, () => { text.text = ""; }));
+            Destroy(collision.gameObject);
+        }
     }
 
     void Update()
     {
+        if (PlayerPrefs.HasKey("removeAds"))
+        {
+            if (PlayerPrefs.GetInt("removeAds") == 1)
+            {
+                removeAdsButton1.interactable = false;
+                removeAdsButton2.interactable = false;
+            }
+        }
+
+        moneyText.text = PlayerPrefs.GetInt("money").ToString();
         if (healthOfRocket > maxNumberOfHealth)
         {
             healthOfRocket = maxNumberOfHealth;
@@ -112,6 +148,7 @@ public class Player : MonoBehaviour
     }
     public void restorePlayer()
     {
+        transform.position = new Vector3(0, 0, 0);
         restoreButton.interactable = true;
         AdManager.checkWatched = false;
         checkDeath = false;
@@ -119,7 +156,7 @@ public class Player : MonoBehaviour
         timerForVideo.fillAmount = 1;
         Time.timeScale = 1;
         menuOfDeath.SetActive(false);
-        healthOfRocket = 3;
+        healthOfRocket = maxNumberOfHealth;
     }
 
     IEnumerator Timer(float time, System.Action action)

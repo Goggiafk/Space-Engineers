@@ -8,8 +8,6 @@ public class IAPManager : MonoBehaviour, IStoreListener
     public Text purchacesText;
     public GameObject settingsMenu;
     public GameObject purchaceMenu;
-    public Button removeAdsButton1;
-    public Button removeAdsButton2;
     public Text moneyText;
 
     public static IAPManager instance;
@@ -74,25 +72,20 @@ public class IAPManager : MonoBehaviour, IStoreListener
         {
             Debug.Log(string.Format("ProcessPurchace: PASS product: '{0}'", args.purchasedProduct.definition.id));
             PlayerPrefs.SetInt("removeAds", 1);
-            removeAdsButton1.interactable = false;
-            removeAdsButton2.interactable = false;
         } else if (String.Equals(args.purchasedProduct.definition.id, coins15000, StringComparison.Ordinal))
         {
             Debug.Log(string.Format("ProcessPurchace: PASS product: '{0}'", args.purchasedProduct.definition.id));
             PlayerPrefs.SetInt("money", PlayerPrefs.GetInt("money") + 15000);
-            moneyText.text = PlayerPrefs.GetInt("money").ToString();
         }
         else if (String.Equals(args.purchasedProduct.definition.id, coins60000, StringComparison.Ordinal))
         {
             Debug.Log(string.Format("ProcessPurchace: PASS product: '{0}'", args.purchasedProduct.definition.id));
             PlayerPrefs.SetInt("money", PlayerPrefs.GetInt("money") + 60000);
-            moneyText.text = PlayerPrefs.GetInt("money").ToString();
         }
         else if (String.Equals(args.purchasedProduct.definition.id, coins120000, StringComparison.Ordinal))
         {
             Debug.Log(string.Format("ProcessPurchace: PASS product: '{0}'", args.purchasedProduct.definition.id));
             PlayerPrefs.SetInt("money", PlayerPrefs.GetInt("money") + 120000);
-            moneyText.text = PlayerPrefs.GetInt("money").ToString();
         } 
         else
         {

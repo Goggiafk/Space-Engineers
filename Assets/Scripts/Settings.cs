@@ -15,6 +15,9 @@ public class Settings : MonoBehaviour
     public Text purchaceText;
     public Button removeAdsButton1;
     public Button removeAdsButton2;
+    public GameObject firstScreen;
+    public GameObject modificationMenu;
+    public Text buytext;
 
     void Start()
     {
@@ -36,6 +39,11 @@ public class Settings : MonoBehaviour
             volumeSlider.value = 0.45f;
         }
     }
+
+    public void closeFirstScreen()
+    {
+        firstScreen.SetActive(false);
+    }
     public void openSettings()
     {
         settingsOfGame.SetActive(!settingsOfGame.activeInHierarchy);
@@ -47,6 +55,13 @@ public class Settings : MonoBehaviour
         purchaceMenu.SetActive(!purchaceMenu.activeInHierarchy);
         interfaceOfGame.SetActive(!interfaceOfGame.activeInHierarchy);
         purchaceText.text = "";
+    }
+
+    public void openModifications()
+    {
+        modificationMenu.SetActive(!modificationMenu.activeInHierarchy);
+        interfaceOfGame.SetActive(!interfaceOfGame.activeInHierarchy);
+        buytext.text = "";
     }
 
     public void resetPrefs()

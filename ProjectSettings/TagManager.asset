@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Meteor
   - Platform
+  - Money
   layers:
   - Default
   - TransparentFX
