@@ -1,0 +1,10 @@
+RemoveAds=Anzeigen Entfernen
+StartButton=BEGINNEN
+BackButton=Geh Zurück
+SOUND=Sound
+HighestScore=HighScore:
+ScoreText=Kerben:
+MoneyText=Geld:
+RestoreLife=Leben Wiederherstellen
+multiplierText=Multiplikator
+moduleBuyText=Nicht genug Geld

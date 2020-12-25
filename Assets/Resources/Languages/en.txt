@@ -6,3 +6,5 @@ HighestScore=Highest Score:
 ScoreText=Scores:
 MoneyText=Money:
 RestoreLife=Restore Life
+multiplierText=multiplier
+moduleBuyText=Not enough money

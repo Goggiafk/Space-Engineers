@@ -15,7 +15,6 @@ public class AdManager : MonoBehaviour, IUnityAdsListener
 #endif
     public Text rewardText;
     public GameObject menuOfDeath;
-    public GameObject heart1;
     public bool isTestBool = false;
     public Image restoreHealth;
     public static bool checkWatched = false;
@@ -109,10 +108,8 @@ public class AdManager : MonoBehaviour, IUnityAdsListener
 
     void rewardPlayer()
     {
+        Player.healthOfRocket += 1;
         checkWatched = true;
-        heart1.SetActive(true);
-        menuOfDeath.SetActive(false);
-        Player.timeForTask = 0;
         restoreHealth.fillAmount = 0;
     }
 }

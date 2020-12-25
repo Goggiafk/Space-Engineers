@@ -6,3 +6,5 @@ HighestScore=Лучший результат:
 ScoreText=Очки:
 MoneyText=Деньги:
 RestoreLife=Восстановить жизнь
+multiplierText=Множитель
+moduleBuyText=Недостаточно средств

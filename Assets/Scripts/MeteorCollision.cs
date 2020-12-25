@@ -7,13 +7,13 @@ public class MeteorCollision : MonoBehaviour
     private Vector2 screenBounds;
     private Rigidbody rb;
     public static float speedOfMeteors = 0;
+    float reversedSpeedOfMeteors;
     void Start()
     {
-        speedOfMeteors = MeteorSpawning.scoreCount / 100;
-        speedOfMeteors = speedOfMeteors - (2 * speedOfMeteors);
+        speedOfMeteors = MeteorSpawning.scoreCount / 150;
+        reversedSpeedOfMeteors = speedOfMeteors - (2 * speedOfMeteors) - 1;
         rb = this.GetComponent<Rigidbody>();
-        rb.velocity = new Vector3(speedOfMeteors, speedOfMeteors, speedOfMeteors);
-        //rb.AddForce(new Vector3(speedOfMeteors, speedOfMeteors, speedOfMeteors), ForceMode.Impulse);
+        rb.velocity = new Vector3(reversedSpeedOfMeteors, reversedSpeedOfMeteors, reversedSpeedOfMeteors);
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
     }
 

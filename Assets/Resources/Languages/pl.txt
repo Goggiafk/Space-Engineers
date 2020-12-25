@@ -6,3 +6,5 @@ HighestScore=Najwyższy Wynik:
 ScoreText=Punkty:
 MoneyText=Pieniądze:
 RestoreLife=Przywróć życie
+multiplierText=mnożnik
+moduleBuyText=Za mało pieniędzy

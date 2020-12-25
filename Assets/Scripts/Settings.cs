@@ -17,7 +17,9 @@ public class Settings : MonoBehaviour
     public Button removeAdsButton2;
     public GameObject firstScreen;
     public GameObject modificationMenu;
-    public Text buytext;
+    public GameObject firstSection;
+    public GameObject secondSection;
+    public GameObject thirdSection;
 
     void Start()
     {
@@ -61,7 +63,9 @@ public class Settings : MonoBehaviour
     {
         modificationMenu.SetActive(!modificationMenu.activeInHierarchy);
         interfaceOfGame.SetActive(!interfaceOfGame.activeInHierarchy);
-        buytext.text = "";
+        firstSection.SetActive(false);
+        secondSection.SetActive(false);
+        thirdSection.SetActive(false);
     }
 
     public void resetPrefs()

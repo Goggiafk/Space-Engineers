@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 185642115531624987}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 3, z: 2}
   m_Children:
   - {fileID: 2447529528580098307}
   m_Father: {fileID: 0}
@@ -72,8 +72,8 @@ GameObject:
   - component: {fileID: 2447529528580098307}
   - component: {fileID: 6677810876558668597}
   - component: {fileID: 1121626070153367500}
-  - component: {fileID: 8954560943150046283}
   - component: {fileID: 206392590987143715}
+  - component: {fileID: 1377075863865529455}
   m_Layer: 0
   m_Name: Meteor_2
   m_TagString: Untagged
@@ -142,19 +142,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &8954560943150046283
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1705746035849902864}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.98079574, y: 0.9855243, z: 1.0231197}
-  m_Center: {x: 0.0032177723, y: 0.0008532254, z: -0.010237366}
 --- !u!95 &206392590987143715
 Animator:
   serializedVersion: 3
@@ -174,3 +161,16 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!135 &1377075863865529455
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705746035849902864}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5115599
+  m_Center: {x: 0.0032177723, y: 0.0008532257, z: -0.010237486}

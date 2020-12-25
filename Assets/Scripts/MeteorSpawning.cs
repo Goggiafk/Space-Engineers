@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,8 +27,16 @@ public class MeteorSpawning : MonoBehaviour
     public GameObject moneyItself;
     public GameObject effectsOfSpace;
 
+    public GameObject multiplierItself;
+    public Text multiplierText;
+
+    int multiplier;
+
     void Update()
     {
+        multiplier = (Mathf.RoundToInt(MeteorCollision.speedOfMeteors/5)+1);
+        multiplierText.text = multiplier.ToString();
+
         if (scoreGaining)
         {
             scores.text = scoreCount.ToString();
@@ -40,8 +49,10 @@ public class MeteorSpawning : MonoBehaviour
     }
     public void invokeSpawning()
     {
+        Player.maxNumberOfHealth = PlayerPrefs.GetInt("maxHearts");
         Player.healthOfRocket = PlayerPrefs.GetInt("maxHearts");
         moneyItself.SetActive(false);
+        multiplierItself.SetActive(true);
         collectableScores.SetActive(true);
         highestScore.SetActive(false);
         rewardText.text = "";
@@ -55,8 +66,9 @@ public class MeteorSpawning : MonoBehaviour
 
     public void cancelSpawning()
     {
+        multiplierItself.SetActive(false);
         moneyItself.SetActive(true);
-        PlayerPrefs.SetInt("money", PlayerPrefs.GetInt("money") + (scoreCount / 5));
+        PlayerPrefs.SetInt("money", PlayerPrefs.GetInt("money") + (scoreCount * multiplier / 10));
         moneyText.text = PlayerPrefs.GetInt("money").ToString();
         collectableScores.SetActive(false);
         highestScore.SetActive(true);
@@ -68,6 +80,7 @@ public class MeteorSpawning : MonoBehaviour
         healthBar.SetActive(false);
         startButton.SetActive(true);
         effectsOfSpace.SetActive(false);
+        Player.healthOfRocket = PlayerPrefs.GetInt("maxHearts");
     }
     void spawnGameObject()
     {
@@ -76,7 +89,7 @@ public class MeteorSpawning : MonoBehaviour
         if (!(randomMeteor == 10))
         {
             Instantiate(meteors[randomMeteor], spawnPosition, Quaternion.Euler(Random.Range(1, 90), Random.Range(1, 90), Random.Range(1, 90)));
-            Vector3 customScale = new Vector3(Random.Range(1, 3), Random.Range(1, 3), Random.Range(1, 3));
+            Vector3 customScale = new Vector3(Random.Range(2, 4), Random.Range(1, 4), Random.Range(1, 3));
             meteors[randomMeteor].transform.localScale = customScale;
         }
         else

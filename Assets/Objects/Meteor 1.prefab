@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8901549876990073884}
   - component: {fileID: 3065830974256797815}
   - component: {fileID: 5913514111598595455}
-  - component: {fileID: 7738638867331008170}
+  - component: {fileID: 6032942841189732682}
   m_Layer: 0
   m_Name: Meteor_1 (1)
   m_TagString: Meteor
@@ -100,8 +100,8 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &7738638867331008170
-BoxCollider:
+--- !u!135 &6032942841189732682
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -111,7 +111,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.0176368, y: 2.053304, z: 2.0447373}
+  m_Radius: 1.026652
   m_Center: {x: -0.000002801419, y: 0.016575394, z: 0.008849383}
 --- !u!1 &6117674828017780838
 GameObject:
@@ -140,7 +140,7 @@ Transform:
   m_GameObject: {fileID: 6117674828017780838}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 2, y: 3, z: 2}
   m_Children:
   - {fileID: 6745631309844433245}
   m_Father: {fileID: 0}

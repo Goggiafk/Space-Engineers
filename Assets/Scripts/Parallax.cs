@@ -7,6 +7,7 @@ public class Parallax : MonoBehaviour
     bool isParallaxed = false;
     public static bool checkRotationOrNot = true;
     public GameObject cube;
+    public GameObject backImage;
 
     // Update is called once per frame
     void Update()
@@ -30,12 +31,13 @@ public class Parallax : MonoBehaviour
             parallaxPosition -= time;
             transform.position = new Vector3(transform.position.x, 0f, 0f);
         }
+        backImage.SetActive(false);
     }
     public void stopParallax()
     {
         checkRotationOrNot = true;
         isParallaxed = false;
         transform.position = new Vector3(transform.position.x, 15f, 0f);
-
+        backImage.SetActive(true);
     }
 }

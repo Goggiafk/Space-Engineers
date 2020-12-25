@@ -752,7 +752,7 @@ GameObject:
   - component: {fileID: 1007207486342103007}
   - component: {fileID: 1007543611636481243}
   m_Layer: 5
-  m_Name: Dropdown_UI 1
+  m_Name: Dropdown_UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -876,6 +876,10 @@ MonoBehaviour:
       m_Image: {fileID: 21300000, guid: 10d2170dc4bc8d843953111d07d0f17d, type: 3}
     - m_Text: "\u0420\u0443\u0441\u0441\u043A\u0438\u0439"
       m_Image: {fileID: 21300000, guid: d9534af035a4cbe4998b3678a91e0b4e, type: 3}
+    - m_Text: Deutsch
+      m_Image: {fileID: 21300000, guid: 196593a0ac27c4e45a6057910e36800b, type: 3}
+    - m_Text: "\u4E2D\u6587"
+      m_Image: {fileID: 21300000, guid: 2ca7c5c4a47443d43a3bdeee4cfa48fa, type: 3}
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -898,6 +902,8 @@ MonoBehaviour:
   - sp
   - pl
   - ru
+  - de
+  - ch
 --- !u!1 &896172276096541227
 GameObject:
   m_ObjectHideFlags: 0

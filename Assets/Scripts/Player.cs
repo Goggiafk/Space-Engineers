@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEngine.UI;
 using Unity.Mathematics;
 using UnityEngine.SocialPlatforms;
+using UnityEngine.Audio;
 
 public class Player : MonoBehaviour
 {
@@ -30,6 +31,10 @@ public class Player : MonoBehaviour
     public Button removeAdsButton2;
 
     public GameObject firstScreen;
+    public GameObject meshOfRocket;
+
+    public AudioClip coinSound, meteorSound;
+    public AudioSource mainSource;
 
     void Start()
     {
@@ -51,24 +56,27 @@ public class Player : MonoBehaviour
 
         if (collision.gameObject.tag == "Meteor")
         {
+            mainSource.PlayOneShot(meteorSound);
             Destroy(collision.gameObject);
             MeshRenderer rocketRendered = GetComponent<MeshRenderer>();
             Collider rockCollider = GetComponent<Collider>();
             StartCoroutine(Timer(0f, () => { rockCollider.enabled = false; }));
-            /*StartCoroutine(Timer(0f, () => { rocketRendered.enabled = false; }));
-            StartCoroutine(Timer(0.5f, () => { rocketRendered.enabled = true; }));
-            StartCoroutine(Timer(1f, () => { rocketRendered.enabled = false; }));
-            StartCoroutine(Timer(1.5f, () => { rocketRendered.enabled = true; }));*/
+            StartCoroutine(Timer(0f, () => { meshOfRocket.SetActive(false); }));
+            StartCoroutine(Timer(0.5f, () => { meshOfRocket.SetActive(true); }));
+            StartCoroutine(Timer(1f, () => { meshOfRocket.SetActive(false); }));
+            StartCoroutine(Timer(1.5f, () => { meshOfRocket.SetActive(true); }));
             StartCoroutine(Timer(1.5f, () => { rockCollider.enabled = true; }));
             StartCoroutine(Timer(0f, () => { text.text = "Ouch!"; }));
             StartCoroutine(Timer(0.8f, () => { text.text = ""; }));
 
-            if (healthOfRocket > 0)
+            if (healthOfRocket >= 1)
             {
+                Debug.Log(healthOfRocket);
                 healthOfRocket--;
             }
             if (healthOfRocket <= 0)
             {
+                Time.timeScale = 0.05f;
                 menuOfDeath.SetActive(true);
                 if (MeteorSpawning.scoreCount > PlayerPrefs.GetInt("highestScore"))
                 {
@@ -76,13 +84,13 @@ public class Player : MonoBehaviour
                     scoreText.text = "Highest Score:\n" + PlayerPrefs.GetInt("highestScore").ToString();
                 }
                 checkDeath = true;
-                Time.timeScale = 0.05f;
             }
         }
         else if (collision.gameObject.tag == "Money")
         {
-            PlayerPrefs.SetInt("money", PlayerPrefs.GetInt("money") + 20);
-            StartCoroutine(Timer(0f, () => { text.text = "+20"; }));
+            mainSource.PlayOneShot(coinSound);
+            PlayerPrefs.SetInt("money", PlayerPrefs.GetInt("money") + 30);
+            StartCoroutine(Timer(0f, () => { text.text = "+30"; }));
             StartCoroutine(Timer(0.8f, () => { text.text = ""; }));
             Destroy(collision.gameObject);
         }
@@ -90,6 +98,7 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+
         if (PlayerPrefs.HasKey("removeAds"))
         {
             if (PlayerPrefs.GetInt("removeAds") == 1)
@@ -134,14 +143,15 @@ public class Player : MonoBehaviour
             {
                 checkDeath = false;
                 restoreButton.interactable = false;
-                if (AdManager.checkWatched)
+                if (!AdManager.checkWatched)
                 {
-                    AdManager.checkWatched = false;
-                    Time.timeScale = 1;
+                    
+                    Time.timeScale = 0;
                 }
                 else
                 {
-                    Time.timeScale = 0;
+                    AdManager.checkWatched = false;
+                    Time.timeScale = 1;
                 }
             }
         }
@@ -156,7 +166,6 @@ public class Player : MonoBehaviour
         timerForVideo.fillAmount = 1;
         Time.timeScale = 1;
         menuOfDeath.SetActive(false);
-        healthOfRocket = maxNumberOfHealth;
     }
 
     IEnumerator Timer(float time, System.Action action)

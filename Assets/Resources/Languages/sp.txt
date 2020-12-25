@@ -6,3 +6,5 @@ HighestScore=Puntuación más alta:
 ScoreText=Puntuaciones:
 MoneyText=Dinero:
 RestoreLife=Restaurar vida
+multiplierText=multiplicador
+moduleBuyText=No hay suficiente dinero

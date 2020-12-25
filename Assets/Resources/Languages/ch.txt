@@ -1,0 +1,10 @@
+RemoveAds=删除广告
+StartButton=开始
+BackButton=回去
+SOUND=声音
+HighestScore=最高分:
+ScoreText=分数:
+MoneyText=钱:
+RestoreLife=恢复生命
+multiplierText=乘数
+moduleBuyText=钱不够
