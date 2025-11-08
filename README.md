@@ -20,3 +20,6 @@
 <p align="center">
   <img width="450" height="800" alt="image" src="https://github.com/user-attachments/assets/2f84a5cb-71f9-4463-9a12-7241c7656d52" />
 </p>
+<p align="center">
+ <img width="370" height="800" alt="image" src="https://github.com/user-attachments/assets/061ef338-5fbb-4f3f-aa22-4a88d571cbf1" />
+</p>
